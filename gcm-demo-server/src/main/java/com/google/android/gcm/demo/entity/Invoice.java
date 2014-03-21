@@ -35,8 +35,7 @@ public class Invoice {
     @ManyToOne
     @JoinField(name="userId")
     private  User user;
-    @Embedded
-    private Payment payment;
+
 
 	public Invoice() {
 	}
@@ -98,6 +97,7 @@ public class Invoice {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
 
     //TODO: override ToString
 }

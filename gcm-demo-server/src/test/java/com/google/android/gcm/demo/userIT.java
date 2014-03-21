@@ -1,5 +1,7 @@
 package com.google.android.gcm.demo;
 
+import com.google.android.gcm.demo.entity.Invoice;
+import com.google.android.gcm.demo.entity.Payment;
 import com.google.android.gcm.demo.entity.User;
 import org.junit.After;
 import org.junit.Assert;
@@ -10,6 +12,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -45,7 +53,7 @@ public class userIT {
         @Test
         public void shouldCreateUser() throws Exception {
 
-            // Creates an instance of book
+            // Creates an instance of user
             User user= new User(1111, "user@test.com", "pass01",
                     "11111111");
 
@@ -55,12 +63,38 @@ public class userIT {
             tx.commit();
             assertNotNull("ID should not be null", user.getUserId());
 
-            // Retrieves all the books from the database
+            // Retrieves all the instances from the database
+            //TODO:implement comment
+        }
+
+        @Test
+        public void shouldCreateAllEntitiesAndReadThem() throws ParseException {
+            // Creates an instance of all entities
+
+            Date startDate =  new SimpleDateFormat("MM/dd/yyyy").parse("05/18/2008");
+            Date endDate =  new SimpleDateFormat("MM/dd/yyyy").parse("05/18/2009");
+                User user= new User(2111, "user@test.com", "pass02", "21111111");
+                Invoice invoice = new Invoice(123, "testInvoice", 1123d, startDate, endDate, user);
+                Payment payment = new Payment(1111,234d)
+
+;
+
+            // Persists entities to the database
+            tx.begin();
+            em.persist(user);
+            em.persist(invoice);
+            em.persist(payment);
+            tx.commit();
+            assertNotNull("ID should not be null", user.getUserId());
+            assertNotNull("ID should not be null", payment.getPaymentId());
+            assertNotNull("ID should not be null", invoice.getInvoiceId());
+
         }
 
 
         @Test
         public void populateInvoices()
+        {}
 
 
 

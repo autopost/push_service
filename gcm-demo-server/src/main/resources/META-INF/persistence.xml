@@ -7,8 +7,9 @@
 
 
     <persistence-unit name="mongoDBUnit1" transaction-type="RESOURCE_LOCAL">
+        <class>com.google.android.gcm.demo.entity.Invoice</class>
         <class>com.google.android.gcm.demo.entity.User</class>
-        <class>com.google.android.gcm.demo.entity.User</class>
+        <class>com.google.android.gcm.demo.entity.Payment</class>
         <properties>
             <!--
                 drop and create is not supporte on non-relational platforms
@@ -26,8 +27,9 @@
 
 <!--    <persistence-unit name="mongoDBUnit2" transaction-type="JTA">-->
     <persistence-unit name="mongoDBUnit2" transaction-type="JTA">
+        <class>com.google.android.gcm.demo.entity.Invoice</class>
         <class>com.google.android.gcm.demo.entity.User</class>
-        <class>com.google.android.gcm.demo.entity.User</class>
+        <class>com.google.android.gcm.demo.entity.Payment</class>
         <properties>
             <!--
                 drop and create is not supporte on non-relational platforms
