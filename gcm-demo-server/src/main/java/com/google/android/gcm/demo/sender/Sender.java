@@ -15,32 +15,22 @@
  */
 package com.google.android.gcm.demo.sender;
 
-import static com.google.android.gcm.demo.sender.Constants.*;
-
 import com.google.android.gcm.demo.sender.Result.Builder;
-
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.BufferedReader;
-import java.io.Closeable;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static com.google.android.gcm.demo.sender.Constants.*;
 
 /**
  * Helper class to send messages to the GCM service using an API Key.
@@ -95,7 +85,7 @@ public class Sender {
 	 *             if registrationId is {@literal null}.
 	 * @throws InvalidRequestException
 	 *             if GCM didn't returned a 200 or 5xx status.
-	 * @throws IOException
+	 * @throws java.io.IOException
 	 *             if message could not be sent.
 	 */
 	public Result send(Message message, String registrationId, int retries)
@@ -130,10 +120,10 @@ public class Sender {
 	/**
 	 * Sends a message without retrying in case of service unavailability. See
 	 * {@link #send(Message, String, int)} for more info.
-	 * 
+	 *
 	 * @return result of the post, or {@literal null} if the GCM service was
 	 *         unavailable or any network exception caused the request to fail.
-	 * 
+	 *
 	 * @throws InvalidRequestException
 	 *             if GCM didn't returned a 200 or 5xx status.
 	 * @throws IllegalArgumentException
@@ -220,7 +210,7 @@ public class Sender {
 		String token = responseParts[0];
 		String value = responseParts[1];
 		if (token.equals(TOKEN_MESSAGE_ID)) {
-			Builder builder = new Result.Builder().messageId(value);
+			Builder builder = new Builder().messageId(value);
 			// check for canonical registration id
 			if (lines.length > 1) {
 				String secondLine = lines[1];
@@ -239,7 +229,7 @@ public class Sender {
 			}
 			return result;
 		} else if (token.equals(TOKEN_ERROR)) {
-			return new Result.Builder().errorCode(value).build();
+			return new Builder().errorCode(value).build();
 		} else {
 			throw new IOException("Invalid response from GCM: " + responseBody);
 		}
@@ -247,26 +237,26 @@ public class Sender {
 
 	/**
 	 * Sends a message to many devices, retrying in case of unavailability.
-	 * 
+	 *
 	 * <p>
 	 * <strong>Note: </strong> this method uses exponential back-off to retry in
 	 * case of service unavailability and hence could block the calling thread
 	 * for many seconds.
-	 * 
+	 *
 	 * @param message
 	 *            message to be sent.
 	 * @param regIds
 	 *            registration id of the devices that will receive the message.
 	 * @param retries
 	 *            number of retries in case of service unavailability errors.
-	 * 
+	 *
 	 * @return combined result of all requests made.
-	 * 
+	 *
 	 * @throws IllegalArgumentException
 	 *             if registrationIds is {@literal null} or empty.
 	 * @throws InvalidRequestException
 	 *             if GCM didn't returned a 200 or 503 status.
-	 * @throws IOException
+	 * @throws java.io.IOException
 	 *             if message could not be sent.
 	 */
 	public MulticastResult send(Message message, List<String> regIds,
@@ -346,14 +336,14 @@ public class Sender {
 	/**
 	 * Updates the status of the messages sent to devices and the list of
 	 * devices that should be retried.
-	 * 
+	 *
 	 * @param unsentRegIds
 	 *            list of devices that are still pending an update.
 	 * @param allResults
 	 *            map of status that will be updated.
 	 * @param multicastResult
 	 *            result of the last multicast sent.
-	 * 
+	 *
 	 * @return updated version of devices that should be retried.
 	 */
 	private List<String> updateStatus(List<String> unsentRegIds,
@@ -382,16 +372,16 @@ public class Sender {
 
 	/**
 	 * Sends a message without retrying in case of service unavailability. See
-	 * {@link #send(Message, List, int)} for more info.
-	 * 
+	 * {@link #send(Message, java.util.List, int)} for more info.
+	 *
 	 * @return multicast results if the message was sent successfully,
 	 *         {@literal null} if it failed but could be retried.
-	 * 
+	 *
 	 * @throws IllegalArgumentException
 	 *             if registrationIds is {@literal null} or empty.
 	 * @throws InvalidRequestException
 	 *             if GCM didn't returned a 200 status.
-	 * @throws IOException
+	 * @throws java.io.IOException
 	 *             if there was a JSON parsing error
 	 */
 	public MulticastResult sendNoRetry(Message message,
@@ -466,7 +456,7 @@ public class Sender {
 					String canonicalRegId = (String) jsonResult
 							.get(TOKEN_CANONICAL_REG_ID);
 					String error = (String) jsonResult.get(JSON_ERROR);
-					Result result = new Result.Builder().messageId(messageId)
+					Result result = new Builder().messageId(messageId)
 							.canonicalRegistrationId(canonicalRegId)
 							.errorCode(error).build();
 					builder.addResult(result);
@@ -541,7 +531,7 @@ public class Sender {
 
 	/**
 	 * Make an HTTP post to a given URL.
-	 * 
+	 *
 	 * @return HTTP response.
 	 */
 	protected HttpURLConnection post(String url, String body)
@@ -552,22 +542,22 @@ public class Sender {
 
 	/**
 	 * Makes an HTTP POST request to a given endpoint.
-	 * 
+	 *
 	 * <p>
 	 * <strong>Note: </strong> the returned connected should not be
 	 * disconnected, otherwise it would kill persistent connections made using
 	 * Keep-Alive.
-	 * 
+	 *
 	 * @param url
 	 *            endpoint to post the request.
 	 * @param contentType
 	 *            type of request.
 	 * @param body
 	 *            body of the request.
-	 * 
+	 *
 	 * @return the underlying connection.
-	 * 
-	 * @throws IOException
+	 *
+	 * @throws java.io.IOException
 	 *             propagated from underlying methods.
 	 */
 	protected HttpURLConnection post(String url, String contentType, String body)
@@ -609,7 +599,7 @@ public class Sender {
 
 	/**
 	 * Creates a {@link StringBuilder} to be used as the body of an HTTP POST.
-	 * 
+	 *
 	 * @param name
 	 *            initial parameter for the POST.
 	 * @param value
@@ -623,7 +613,7 @@ public class Sender {
 
 	/**
 	 * Adds a new parameter to the HTTP POST body.
-	 * 
+	 *
 	 * @param body
 	 *            HTTP POST body.
 	 * @param name
@@ -638,7 +628,7 @@ public class Sender {
 	}
 
 	/**
-	 * Gets an {@link HttpURLConnection} given an URL.
+	 * Gets an {@link java.net.HttpURLConnection} given an URL.
 	 */
 	protected HttpURLConnection getConnection(String url) throws IOException {
 		HttpURLConnection conn = (HttpURLConnection) new URL(url)

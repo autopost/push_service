@@ -1,23 +1,26 @@
 package com.google.android.gcm.demo.entity;
 
-import org.springframework.data.annotation.Id;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import org.eclipse.persistence.nosql.annotations.DataFormatType;
+import org.eclipse.persistence.nosql.annotations.Field;
+import org.eclipse.persistence.nosql.annotations.NoSql;
+
+
+import javax.persistence.*;
+
 
 /** * Created by arkadii.tetelman on 3/19/14. */
 @Entity
+@NoSql(dataFormat= DataFormatType.MAPPED,dataType="user")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "userId")
+	@Field(name = "userId")
 	private long userId;
-	@Column
+	@Basic
 	private String userEmail;
-	@Column
+	@Basic
 	private String userPassword;
-	@Column
+	@Basic
 	private String googleAPIKey;
 
 	public User(long userId, String userEmail, String userPassword,

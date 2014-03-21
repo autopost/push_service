@@ -25,7 +25,7 @@ import java.util.Map;
  *
  * <p>
  * Instances of this class are immutable and should be created using a
- * {@link Builder}. Examples:
+ * {@link com.google.android.gcm.demo.sender.Message.Builder}. Examples:
  *
  * <strong>Simplest message:</strong>
  * <pre><code>

@@ -1,35 +1,40 @@
 package com.google.android.gcm.demo.entity;
 
-import org.springframework.data.annotation.Id;
+import org.eclipse.persistence.nosql.annotations.DataFormatType;
+import org.eclipse.persistence.nosql.annotations.Field;
+import org.eclipse.persistence.nosql.annotations.JoinField;
+import org.eclipse.persistence.nosql.annotations.NoSql;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import java.sql.Date;
+
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by arkadii.tetelman on 3/13/14.
  */
 
 @Entity
+@NoSql(dataFormat= DataFormatType.MAPPED,dataType="invoice")
 public class Invoice {
 
-	@Id
+    @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "invoiceId")
+	@Field(name = "invoiceId")
 	long invoiceId;
 
-	@Column
-	String invoiceName;
-	@Column
-	Double invoiceAmount;
-	@Column
-	Date invoiceSubmitedTS;
-	@Column
-	Date invoiceCompletedTS;
-	@Column
-	User user;
+	@Basic
+	private String invoiceName;
+    @Basic
+    private Double invoiceAmount;
+    @Basic
+    @Temporal(TemporalType.DATE)
+    private Date invoiceSubmitedTS;
+    @Basic
+    @Temporal(TemporalType.DATE)
+    private Date invoiceCompletedTS;
+    @ManyToOne
+    @JoinField(name="userId")
+    private  User user;
 
 	public Invoice() {
 	}

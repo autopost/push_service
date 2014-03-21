@@ -15,23 +15,18 @@
  */
 package com.google.android.gcm.demo.server;
 
-import com.google.android.gcm.demo.sender.Constants;
-import com.google.android.gcm.demo.sender.Message;
-import com.google.android.gcm.demo.sender.MulticastResult;
-import com.google.android.gcm.demo.sender.Result;
-import com.google.android.gcm.demo.sender.Sender;
+import com.google.android.gcm.demo.sender.*;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
-
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet that adds a new message to all registered devices.
@@ -54,7 +49,7 @@ public class SendAllMessagesServlet extends BaseServlet {
   }
 
   /**
-   * Creates the {@link Sender} based on the servlet settings.
+   * Creates the {@link com.google.android.gcm.demo.sender.Sender} based on the servlet settings.
    */
   protected Sender newSender(ServletConfig config) {
     String key = (String) config.getServletContext()

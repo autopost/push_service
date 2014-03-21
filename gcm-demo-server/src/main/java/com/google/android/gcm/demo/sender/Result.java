@@ -29,7 +29,7 @@ import java.io.Serializable;
  * <p>
  * There are cases when a request is accept and the message successfully
  * created, but GCM has a canonical registration id for that device. In this
- * case, the server should update the registration id to avoid rejected requests
+ * case, the com.google.android.gcm.demo.server should update the registration id to avoid rejected requests
  * in the future.
  * 
  * <p>
@@ -40,7 +40,7 @@ import java.io.Serializable;
  *     - non-{@literal null} means the message was created:
  *       - Call {@link #getCanonicalRegistrationId()}
  *         - if it returns {@literal null}, do nothing.
- *         - otherwise, update the server datastore with the new id.
+ *         - otherwise, update the com.google.android.gcm.demo.server datastore with the new id.
  * </pre>
  */
 @SuppressWarnings("serial")
