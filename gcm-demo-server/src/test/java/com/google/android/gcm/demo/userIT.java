@@ -15,6 +15,7 @@ import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by VladyslavPrytula on 3/20/14.
+ * Integration test for persistence units
  */
 public class userIT {
 
@@ -35,7 +36,7 @@ public class userIT {
 
         @Test
         public void shouldUserPassword() throws Exception {
-            User user = em.find(User.class,1001L);
+            User user = em.find(User.class,1111L);
 
             Assert.assertEquals("pass01",user.getUserPassword() );
         }

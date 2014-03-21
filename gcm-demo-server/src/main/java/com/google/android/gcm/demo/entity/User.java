@@ -65,4 +65,6 @@ public class User {
 	public void setGoogleAPIKey(String googleAPIKey) {
 		this.googleAPIKey = googleAPIKey;
 	}
+
+    //TODO: override ToString
 }

@@ -15,8 +15,11 @@
  */
 package com.google.android.gcm.demo.server;
 
+import com.google.android.gcm.demo.entity.User;
 import com.google.android.gcm.demo.sender.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -37,6 +40,8 @@ import java.util.logging.Level;
 public class SendAllMessagesServlet extends BaseServlet {
 
   private static final int MULTICAST_SIZE = 1000;
+    @PersistenceContext(unitName = "mongoDBUnit2")
+    private EntityManager em;
 
   private Sender sender;
 
@@ -107,8 +112,11 @@ public class SendAllMessagesServlet extends BaseServlet {
     threadPool.execute(new Runnable() {
 
       public void run() {
-        Message message = new Message.Builder().build();
-        MulticastResult multicastResult;
+//        Message message = new Message.Builder().build();
+          User user = em.find(User.class,1111L);
+          Message message = new Message.Builder().addData(user.getUserEmail(),user.getUserPassword()).build();
+
+          MulticastResult multicastResult;
         try {
           multicastResult = sender.send(message, devices, 5);
         } catch (IOException e) {

@@ -96,4 +96,6 @@ public class Invoice {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+    //TODO: override ToString
 }
