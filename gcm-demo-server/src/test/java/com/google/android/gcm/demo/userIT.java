@@ -19,7 +19,7 @@ import static org.junit.Assert.assertNotNull;
  */
 public class userIT {
 
-        private static EntityManagerFactory emf =  Persistence.createEntityManagerFactory("mongoDBUnit2");
+        private static EntityManagerFactory emf =  Persistence.createEntityManagerFactory("mongoDBUnit1");
 
         private EntityManager em;
         private EntityTransaction tx;

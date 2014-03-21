@@ -6,18 +6,25 @@
 
 
 
-        <persistence-unit name="mongoDBUnit1" transaction-type="RESOURCE_LOCAL">
-            <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-            <properties>
-                <property name="eclipselink.target-database" value="org.eclipse.persistence.nosql.adapters.mongo.MongoPlatform"/>
-                <property name="eclipselink.nosql.connection-spec" value="org.eclipse.persistence.nosql.adapters.mongo.MongoConnectionSpec"/>
-                <property name="eclipselink.nosql.property.mongo.port" value="27017"/>
-                <property name="eclipselink.nosql.property.mongo.host" value="host1"/>
-                <property name="eclipselink.nosql.property.mongo.db" value="dbs"/>
-            </properties>
-        </persistence-unit>
+    <persistence-unit name="mongoDBUnit1" transaction-type="RESOURCE_LOCAL">
+        <class>com.google.android.gcm.demo.entity.User</class>
+        <class>com.google.android.gcm.demo.entity.User</class>
+        <properties>
+            <!--
+                drop and create is not supporte on non-relational platforms
+            <property name="javax.persistence.schema-generation.database.action"
+                      value="drop-and-create"/>
+            -->
+            <property name="eclipselink.target-database" value="org.eclipse.persistence.nosql.adapters.mongo.MongoPlatform"/>
+            <property name="eclipselink.nosql.connection-spec" value="org.eclipse.persistence.nosql.adapters.mongo.MongoConnectionSpec"/>
+            <property name="eclipselink.nosql.property.mongo.port" value="27017"/>
+            <property name="eclipselink.nosql.property.mongo.host" value="localhost"/>
+            <property name="eclipselink.nosql.property.mongo.db" value="dbs"/>
+            <property name="eclipselink.logging.level" value="FINEST"/>
+        </properties>
+    </persistence-unit>
 
-<!--    <persistence-unit name="mongoDBUnit2" transaction-type="RESOURCE_LOCAL">-->
+<!--    <persistence-unit name="mongoDBUnit2" transaction-type="JTA">-->
     <persistence-unit name="mongoDBUnit2" transaction-type="JTA">
         <class>com.google.android.gcm.demo.entity.User</class>
         <class>com.google.android.gcm.demo.entity.User</class>
