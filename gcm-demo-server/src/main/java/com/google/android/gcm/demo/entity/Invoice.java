@@ -8,6 +8,7 @@ import org.eclipse.persistence.nosql.annotations.NoSql;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by arkadii.tetelman on 3/13/14.
@@ -35,6 +36,9 @@ public class Invoice {
     @ManyToOne
     @JoinField(name="userId")
     private  User user;
+    @OneToMany
+    @JoinField(name = "paymentId")
+    private List<Payment> paymentList;
 
 
 	public Invoice() {
@@ -47,7 +51,7 @@ public class Invoice {
 		this.invoiceAmount = invoiceAmount;
 		this.invoiceSubmitedTS = invoiceSubmitedTS;
 		this.invoiceCompletedTS = invoiceCompletedTS;
-		this.user = user;
+		this.setUser(user);
 	}
 
 	public long getInvoiceId() {

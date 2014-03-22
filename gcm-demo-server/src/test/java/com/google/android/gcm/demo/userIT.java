@@ -19,6 +19,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -85,9 +86,12 @@ public class userIT {
             em.persist(invoice);
             em.persist(payment);
             tx.commit();
-            assertNotNull("ID should not be null", user.getUserId());
+   /*         assertNotNull("ID should not be null", emuser.getUserId());
             assertNotNull("ID should not be null", payment.getPaymentId());
-            assertNotNull("ID should not be null", invoice.getInvoiceId());
+            assertNotNull("ID should not be null", invoice.getInvoiceId());*/
+            Invoice testInvoice =em.find(Invoice.class,123);
+            assertNotNull(testInvoice.getInvoiceAmount());
+            assertNotNull(testInvoice.getUser().getUserEmail());
 
         }
 
