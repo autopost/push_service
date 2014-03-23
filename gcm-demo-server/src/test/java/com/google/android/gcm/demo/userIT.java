@@ -72,13 +72,9 @@ public class userIT {
         public void shouldCreateAllEntitiesAndReadThem() throws ParseException {
             // Creates an instance of all entities
 
-            Date startDate =  new SimpleDateFormat("MM/dd/yyyy").parse("05/18/2008");
-            Date endDate =  new SimpleDateFormat("MM/dd/yyyy").parse("05/18/2009");
-                User user= new User(2111, "user@test.com", "pass02", "21111111");
-                Invoice invoice = new Invoice(123l, "testInvoice", 1123d, startDate, endDate, user);
-                Payment payment = new Payment(1111,234d)
-
-;
+            User user= new User(2111, "user@test.com", "pass02", "21111111");
+            Invoice invoice = new Invoice(123l, "testInvoice", 1123d, new SimpleDateFormat("MM/dd/yyyy").parse("05/18/2008"), new SimpleDateFormat("MM/dd/yyyy").parse("05/18/2009"), user);
+            Payment payment = new Payment(1111,234d);
 
             // Persists entities to the database
             tx.begin();
