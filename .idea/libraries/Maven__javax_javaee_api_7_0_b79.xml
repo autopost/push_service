@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: javax:javaee-api:7.0-b79">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/javax/javaee-api/7.0-b79/javaee-api-7.0-b79.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/javax/javaee-api/7.0-b79/javaee-api-7.0-b79-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/javax/javaee-api/7.0-b79/javaee-api-7.0-b79-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

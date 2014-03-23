@@ -3,6 +3,9 @@ package com.google.android.gcm.demo.bo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
+
+import com.google.android.gcm.demo.custqualifiers.Loggable;
+
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.core.learning.SupervisedTrainingElement;
 import org.neuroph.core.learning.TrainingElement;
@@ -16,12 +19,16 @@ import javax.persistence.PersistenceContext;
 /**
  * Created by VladyslavPrytula on 3/23/14.
  */
+@Loggable
 public class paymentPredictor {
-    int maxIterations = 10000;
-    double daxmax = 10000.0D;
+    private int maxIterations;
 
     @PersistenceContext(unitName = "mongoDBUnit2")
     private EntityManager em;
+
+    public paymentPredictor() {
+        maxIterations = 10000;
+    }
 
     public void predict() {
 
@@ -32,6 +39,11 @@ public class paymentPredictor {
 
         TrainingSet trainingSet = new TrainingSet();
 
+//        To find the max value of Payment : maxPayment = max(days [k], k =0, days.length-1))
+//        To calculate normalized values:
+//        paymentNorm [i] = (days [i] [3] / maxPayment)*0.8+0.1, where 0.8 and 0.1 will be used to avoid the very small (0.0...) and very big (0.9999) values.
+//        We have carried out a simplification, have simply divided on 10000.
+        double daxmax = 10000.0D;
 
         trainingSet.addElement(new SupervisedTrainingElement(new double[]{3710.0D / daxmax, 3690.0D / daxmax, 3890.0D / daxmax, 3695.0D / daxmax}, new double[]{3666.0D / daxmax}));
         trainingSet.addElement(new SupervisedTrainingElement(new double[]{3690.0D / daxmax, 3890.0D / daxmax, 3695.0D / daxmax, 3666.0D / daxmax}, new double[]{3692.0D / daxmax}));
