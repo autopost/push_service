@@ -7,6 +7,7 @@ import org.eclipse.persistence.nosql.annotations.NoSql;
 
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 /** * Created by arkadii.tetelman on 3/19/14. */
@@ -19,10 +20,19 @@ public class Payment {
     private long paymentId;
     @Basic
     private Double amount;
-    @ManyToOne
-    @JoinField(name="invoiceId")
-    private Invoice invoice;
+    @Basic
+    @Temporal(TemporalType.DATE)
+    private Date debitTS;
+    @Basic
+    @Temporal(TemporalType.DATE)
+    private Date creditTS;
 
+
+    public Payment(long paymentId, Double amount, Date debitTs, Date creditTS) {
+        this(paymentId,amount);
+        this.setDebitTS(debitTs);
+        this.setCreditTS(creditTS);
+    }
 
     public Payment(long paymentId, Double amount) {
         this.setPaymentId(paymentId);
@@ -46,6 +56,22 @@ public class Payment {
 
     public void setPaymentId(long paymentId) {
         this.paymentId = paymentId;
+    }
+
+    public Date getDebitTS() {
+        return debitTS;
+    }
+
+    public void setDebitTS(Date debitTS) {
+        this.debitTS = debitTS;
+    }
+
+    public Date getCreditTS() {
+        return creditTS;
+    }
+
+    public void setCreditTS(Date creditTS) {
+        this.creditTS = creditTS;
     }
 
 
