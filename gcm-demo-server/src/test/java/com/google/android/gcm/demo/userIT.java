@@ -19,6 +19,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -72,9 +73,9 @@ public class userIT {
         public void shouldCreateAllEntitiesAndReadThem() throws ParseException {
             // Creates an instance of all entities
 
-            User user= new User(2111, "user@test.com", "pass02", "21111111");
+            User user= new User(2111l, "user@test.com", "pass02", "21111111");
             Invoice invoice = new Invoice(123l, "testInvoice", 1123d, new SimpleDateFormat("MM/dd/yyyy").parse("05/18/2008"), new SimpleDateFormat("MM/dd/yyyy").parse("05/18/2009"), user);
-            Payment payment = new Payment(1111,234d);
+            Payment payment = new Payment(1111l,234d);
 
             // Persists entities to the database
             tx.begin();
@@ -82,13 +83,13 @@ public class userIT {
             em.persist(invoice);
             em.persist(payment);
             tx.commit();
-   /*         assertNotNull("ID should not be null", emuser.getUserId());
-            assertNotNull("ID should not be null", payment.getPaymentId());
-            assertNotNull("ID should not be null", invoice.getInvoiceId());*/
+
+            //Retrieve invoice from the database
             Invoice testInvoice =em.find(Invoice.class,123l);
+
             assertNotNull(testInvoice.getInvoiceAmount());
             assertNotNull(testInvoice.getUser().getUserEmail());
-
+            assertEquals(testInvoice.getUser().getUserEmail(),em.find(User.class,2111l).getUserEmail());
         }
 
 
