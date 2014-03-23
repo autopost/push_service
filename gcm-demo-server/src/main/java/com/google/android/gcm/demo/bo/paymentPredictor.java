@@ -7,9 +7,7 @@ import java.util.Vector;
 
 import com.google.android.gcm.demo.custqualifiers.Loggable;
 
-import com.google.android.gcm.demo.entity.Payment;
 import com.google.android.gcm.demo.entity.User;
-import com.google.android.gcm.demo.entity.User_;
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.core.learning.SupervisedTrainingElement;
 import org.neuroph.core.learning.TrainingElement;
@@ -21,7 +19,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 /**

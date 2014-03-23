@@ -26,7 +26,7 @@
         </properties>
     </persistence-unit>
 
-  <persistence-unit name="mongoDBUnit2" transaction-type="JTA">
+     <persistence-unit name="mongoDBUnit2" transaction-type="JTA">
         <class>com.google.android.gcm.demo.entity.Invoice</class>
         <class>com.google.android.gcm.demo.entity.User</class>
         <class>com.google.android.gcm.demo.entity.Payment</class>

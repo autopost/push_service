@@ -119,7 +119,31 @@
                     <source>1.7</source>
                     <target>1.7</target>
                     <encoding>UTF-8</encoding>
-                </configuration>
+
+                        <proc combine.self="override">only</proc>
+                        <!-- compilerArguments can be removed if there is only one -->
+                        <!-- PU in the project or eclipselink.canonicalmodel.subpackage -->
+                        <!-- has been defined for each additional PU added in-->
+                        <compilerArguments combine.children="append">
+                            <Aeclipselink.persistenceunits>
+                                mongoDBUnit1
+                            </Aeclipselink.persistenceunits>
+                        </compilerArguments>
+
+                        <!-- edit the unique directory path to match where the -->
+                        <!-- JPA entities exist -->
+<!--                        <includes combine.self="override">
+                            <include>**/entity/jpa/*.java</include>
+                        </includes>-->
+                        <generatedSourcesDirectory>
+                            ${project.build.directory}/generated-sources/metamodel
+                        </generatedSourcesDirectory>
+                        <annotationProcessors combine.self="override">
+                            <annotationProcessor>
+                                org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor
+                            </annotationProcessor>
+                        </annotationProcessors>
+                    </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -154,7 +178,7 @@
                 </configuration>
             </plugin>
 
-            <plugin>
+<!--            <plugin>
                 <groupId>org.bsc.maven</groupId>
                 <artifactId>maven-processor-plugin</artifactId>
                 <version>2.2.4</version>
@@ -168,7 +192,10 @@
                         <configuration>
                             <outputDirectory>${project.build.directory}/generated-sources/metamodel</outputDirectory>
                             <compilerArguments>
-                                    -Aeclipselink.persistencexml=/src/main/resources/META-INF/persistence.xml -Aeclipselink.persistenceunits=mongoDBUnit1
+                                    -Aeclipselink.persistencexml=/src/main/resources/META-INF/persistence.xml
+                                <Aeclipselink.persistenceunits>
+                                    mongoDBUnit1
+                                </Aeclipselink.persistenceunits>
                             </compilerArguments>
                             <processors>
                                 <processor>org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor</processor>
@@ -176,7 +203,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
 
         </plugins>
     </build>
