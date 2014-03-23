@@ -95,7 +95,46 @@ public class userIT {
 
         @Test
         public void populateInvoices()
-        {}
+        {
+            class RandomDateOfTransaction {
+
+                public Date prepareDate() {
+
+                    GregorianCalendar gc = new GregorianCalendar();
+                    int year = randBetween(1900, 2010);
+                    gc.set(gc.YEAR, year);
+                    int dayOfYear = randBetween(1, gc.getActualMaximum(gc.DAY_OF_YEAR));
+                    gc.set(gc.DAY_OF_YEAR, dayOfYear);
+
+                    //TODO: needs to be logged (gc.get(gc.YEAR) + "-" + gc.get(gc.MONTH) + "-" + gc.get(gc.DAY_OF_MONTH));
+
+                    return gc.getTime();
+                }
+
+                public int randBetween(int start, int end) {
+                    return start + (int)Math.round(Math.random() * (end - start));
+                }
+            }
+
+            User user= new User(3111l, "user@test.com", "pass02", "21111111");
+            Invoice invoice = new Invoice(1234l, "testInvoice", 1000.12d, new RandomDateOfTransaction().prepareDate(),new RandomDateOfTransaction().prepareDate() , user);
+            Payment payment = new Payment(1111l,2345d);
+
+            // Persists entities to the database
+            tx.begin();
+            em.persist(user);
+            em.persist(invoice);
+            em.persist(payment);
+            tx.commit();
+
+            //Retrieve invoice from the database
+            Invoice testInvoice =em.find(Invoice.class,1234l);
+
+            assertNotNull(testInvoice.getInvoiceAmount());
+            assertNotNull(testInvoice.getUser().getUserEmail());
+            assertEquals(testInvoice.getUser().getUserEmail(),em.find(User.class,3111l).getUserEmail());
+
+        }
 
 
 
