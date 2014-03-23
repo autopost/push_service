@@ -7,6 +7,7 @@ import org.eclipse.persistence.nosql.annotations.NoSql;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 
@@ -19,6 +20,7 @@ public class Payment {
     @Field(name = "paymentId")
     private long paymentId;
     @Basic
+    @NotNull
     private Double amount;
     @Basic
     @Temporal(TemporalType.DATE)
