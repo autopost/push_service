@@ -2,10 +2,14 @@ package com.google.android.gcm.demo.bo;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Vector;
 
 import com.google.android.gcm.demo.custqualifiers.Loggable;
 
+import com.google.android.gcm.demo.entity.Payment;
+import com.google.android.gcm.demo.entity.User;
+import com.google.android.gcm.demo.entity.User_;
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.core.learning.SupervisedTrainingElement;
 import org.neuroph.core.learning.TrainingElement;
@@ -15,6 +19,10 @@ import org.neuroph.nnet.learning.LMS;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Root;
 
 /**
  * Created by VladyslavPrytula on 3/23/14.
@@ -88,4 +96,22 @@ public class paymentPredictor {
         System.exit(0);
 
     }
+
+    public Double computeMaxPaymentAmount(Date startDate, Date endDate){
+
+        User user = em.find(User.class,9999l);
+        CriteriaBuilder queryBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<User> criteria = queryBuilder.createQuery(User.class);
+        Root<User> userRoot = criteria.from(User.class );
+        criteria.select(userRoot);
+        criteria.where(queryBuilder.equal(userRoot.get(User_.userId),9999l));
+        List<User> people = em.createQuery( criteria ).getResultList();
+
+        return 1000.0d;
+    }
+
+    public Double computeMinPaymentAmount(Date startDate, Date endDate){
+        return 1.0d;
+    }
+
 }

@@ -19,35 +19,35 @@
     </repositories>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
+            <version>2.5.1</version>
+        </dependency>
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>5.0.0.Alpha1</version>
         </dependency>
 
+        <!--local dependency-->
+        <dependency>
+            <groupId>neuroph</groupId>
+            <artifactId>org.neuroph</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/neuroph.jar</systemPath>
+        </dependency>
 
-        <!--        <dependency>
-                    <groupId>org.apache.derby</groupId>
-                    <artifactId>derbyclient</artifactId>
-                    <version>10.10.1.1</version>
-                </dependency>
-                <dependency>
-                    <groupId>mysql</groupId>
-                    <artifactId>mysql-connector-java</artifactId>
-                    <version>5.1.6</version>
-                </dependency>
-                <dependency>
-                    <groupId>org.apache.derby</groupId>
-                    <artifactId>derby</artifactId>
-                    <version>10.10.1.1</version>
-                </dependency>-->
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
             <scope>test</scope>
         </dependency>
-
         <!-- JPA NoSQL -->
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
@@ -146,9 +146,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <!--                <configuration>
-                                    <mainClass>org.ghostwheel.jee7book.chapter04.Main</mainClass>
-                                </configuration>-->
             </plugin>
             <plugin>
                 <artifactId>maven-deploy-plugin</artifactId>
@@ -156,6 +153,31 @@
                     <skip>true</skip>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.bsc.maven</groupId>
+                <artifactId>maven-processor-plugin</artifactId>
+                <version>2.2.4</version>
+                <executions>
+                    <execution>
+                        <id>eclipselink-jpa-metamodel</id>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/generated-sources/metamodel</outputDirectory>
+                            <compilerArguments>
+                             -Aeclipselink.persistencexml=/src/main/resources/META-INF/persistence.xml
+                            </compilerArguments>
+                            <processors>
+                                <processor>org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor</processor>
+                            </processors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 

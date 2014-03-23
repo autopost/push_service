@@ -2,10 +2,12 @@ package com.google.android.gcm.demo.entity;
 
 import org.eclipse.persistence.nosql.annotations.DataFormatType;
 import org.eclipse.persistence.nosql.annotations.Field;
+import org.eclipse.persistence.nosql.annotations.JoinField;
 import org.eclipse.persistence.nosql.annotations.NoSql;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 
 /** * Created by arkadii.tetelman on 3/19/14. */
@@ -22,6 +24,9 @@ public class User {
 	private String userPassword;
 	@Basic
 	private String googleAPIKey;
+    @OneToMany
+    @JoinField(name = "paymentId")
+    private List<Payment> paymentList;
 
 	public User(long userId, String userEmail, String userPassword,
 			String googleAPIKey) {
@@ -30,6 +35,7 @@ public class User {
 		this.userPassword = userPassword;
 		this.googleAPIKey = googleAPIKey;
 	}
+
 
 	public User() {
 	}
@@ -65,6 +71,14 @@ public class User {
 	public void setGoogleAPIKey(String googleAPIKey) {
 		this.googleAPIKey = googleAPIKey;
 	}
+
+    public List<Payment> getPaymentList() {
+        return paymentList;
+    }
+
+    public void setPaymentList(List<Payment> paymentList) {
+        this.paymentList = paymentList;
+    }
 
     //TODO: override ToString
 }

@@ -64,21 +64,24 @@ public class dataPreparationIT {
 
         List<Payment> paymentsList = new ArrayList<>();
 
+
         for (int i =0 ; i < 40; i++){
             paymentsList.add(new Payment(1111l+(long)i,(Double)(Math.random() * 50 + 1),
                     new RandomDateOfTransaction().prepareDate(2012,2013),
                     new RandomDateOfTransaction().prepareDate(2012,2013)));
         }
-
+        User user = new User(9999l, "PaymentOwner@test.com", "pass", "21111111");
+        user.setPaymentList(paymentsList);
         // Persists paymentsList to the database
 
         tx.begin();
         for (Payment pmnt : paymentsList) {
             em.persist(pmnt);
         }
+        em.persist(user);
         tx.commit();
 
         //Retrieve payments from the databaseç
-
+        assertNotNull(em.find(User.class,9999l).getPaymentList().size());
     }
 }

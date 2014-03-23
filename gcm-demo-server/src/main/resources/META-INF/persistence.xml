@@ -7,6 +7,7 @@
 
 
     <persistence-unit name="mongoDBUnit1" transaction-type="RESOURCE_LOCAL">
+       <!-- <exclude-unlisted-classes>false</exclude-unlisted-classes>-->
         <class>com.google.android.gcm.demo.entity.Invoice</class>
         <class>com.google.android.gcm.demo.entity.User</class>
         <class>com.google.android.gcm.demo.entity.Payment</class>
@@ -25,17 +26,11 @@
         </properties>
     </persistence-unit>
 
-<!--    <persistence-unit name="mongoDBUnit2" transaction-type="JTA">-->
-    <persistence-unit name="mongoDBUnit2" transaction-type="JTA">
+<!--   <persistence-unit name="mongoDBUnit2" transaction-type="JTA">
         <class>com.google.android.gcm.demo.entity.Invoice</class>
         <class>com.google.android.gcm.demo.entity.User</class>
         <class>com.google.android.gcm.demo.entity.Payment</class>
         <properties>
-            <!--
-                drop and create is not supporte on non-relational platforms
-            <property name="javax.persistence.schema-generation.database.action"
-                      value="drop-and-create"/>
-            -->
             <property name="eclipselink.target-database" value="org.eclipse.persistence.nosql.adapters.mongo.MongoPlatform"/>
             <property name="eclipselink.nosql.connection-spec" value="org.eclipse.persistence.nosql.adapters.mongo.MongoConnectionSpec"/>
             <property name="eclipselink.nosql.property.mongo.port" value="27017"/>
@@ -43,7 +38,7 @@
             <property name="eclipselink.nosql.property.mongo.db" value="dbs"/>
             <property name="eclipselink.logging.level" value="FINEST"/>
         </properties>
-    </persistence-unit>
+    </persistence-unit>-->
 <!--    <persistence-unit name="hiberMongoDB" transaction-type="JTA">
         &lt;!&ndash; Use Hibernate OGM provider: configuration will be transparent &ndash;&gt;
         <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
