@@ -168,7 +168,7 @@
                         <configuration>
                             <outputDirectory>${project.build.directory}/generated-sources/metamodel</outputDirectory>
                             <compilerArguments>
-                             -Aeclipselink.persistencexml=/src/main/resources/META-INF/persistence.xml
+                                    -Aeclipselink.persistencexml=/src/main/resources/META-INF/persistence.xml -Aeclipselink.persistenceunits=mongoDBUnit1
                             </compilerArguments>
                             <processors>
                                 <processor>org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor</processor>

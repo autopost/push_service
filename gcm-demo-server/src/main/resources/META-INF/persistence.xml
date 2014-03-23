@@ -26,7 +26,7 @@
         </properties>
     </persistence-unit>
 
-<!--   <persistence-unit name="mongoDBUnit2" transaction-type="JTA">
+  <persistence-unit name="mongoDBUnit2" transaction-type="JTA">
         <class>com.google.android.gcm.demo.entity.Invoice</class>
         <class>com.google.android.gcm.demo.entity.User</class>
         <class>com.google.android.gcm.demo.entity.Payment</class>
@@ -38,7 +38,7 @@
             <property name="eclipselink.nosql.property.mongo.db" value="dbs"/>
             <property name="eclipselink.logging.level" value="FINEST"/>
         </properties>
-    </persistence-unit>-->
+    </persistence-unit>
 <!--    <persistence-unit name="hiberMongoDB" transaction-type="JTA">
         &lt;!&ndash; Use Hibernate OGM provider: configuration will be transparent &ndash;&gt;
         <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
