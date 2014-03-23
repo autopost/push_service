@@ -8,6 +8,7 @@ import java.util.Vector;
 import com.google.android.gcm.demo.custqualifiers.Loggable;
 
 import com.google.android.gcm.demo.entity.User;
+import com.google.android.gcm.demo.entity.User_;
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.core.learning.SupervisedTrainingElement;
 import org.neuroph.core.learning.TrainingElement;

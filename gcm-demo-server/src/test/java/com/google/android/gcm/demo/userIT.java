@@ -3,6 +3,7 @@ package com.google.android.gcm.demo;
 import com.google.android.gcm.demo.entity.Invoice;
 import com.google.android.gcm.demo.entity.Payment;
 import com.google.android.gcm.demo.entity.User;
+import com.google.android.gcm.demo.entity.User_;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -129,6 +130,7 @@ public class userIT {
         em.persist(invoice);
         em.persist(payment);
         tx.commit();
+
 
         //Retrieve invoice from the database
         Invoice testInvoice =em.find(Invoice.class,1234l);

@@ -12,10 +12,10 @@
         </webroots>
         <sourceRoots>
           <root url="file://$MODULE_DIR$/target/generated-sources/meta-model" />
-          <root url="file://$MODULE_DIR$/target/generated-sources/metamodel" />
           <root url="file://$MODULE_DIR$/target/generated-sources/annotations" />
           <root url="file://$MODULE_DIR$/src/main/java" />
           <root url="file://$MODULE_DIR$/src/main/resources" />
+          <root url="file://$MODULE_DIR$/target/generated-sources/metamodel" />
         </sourceRoots>
       </configuration>
     </facet>
@@ -42,6 +42,7 @@
       <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/metamodel" isTestSource="false" generated="true" />
       <excludeFolder url="file://$MODULE_DIR$/target/Poc_Push-1.0-SNAPSHOT" />
       <excludeFolder url="file://$MODULE_DIR$/target/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/target/failsafe-reports" />
       <excludeFolder url="file://$MODULE_DIR$/target/maven-archiver" />
       <excludeFolder url="file://$MODULE_DIR$/target/test-classes" />
     </content>
