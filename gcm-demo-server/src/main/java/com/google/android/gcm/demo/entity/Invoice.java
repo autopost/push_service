@@ -21,7 +21,7 @@ public class Invoice {
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Field(name = "invoiceId")
-	long invoiceId;
+	private long invoiceId;
 
 	@Basic
 	private String invoiceName;

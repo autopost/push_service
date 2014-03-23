@@ -75,7 +75,7 @@ public class userIT {
             Date startDate =  new SimpleDateFormat("MM/dd/yyyy").parse("05/18/2008");
             Date endDate =  new SimpleDateFormat("MM/dd/yyyy").parse("05/18/2009");
                 User user= new User(2111, "user@test.com", "pass02", "21111111");
-                Invoice invoice = new Invoice(123, "testInvoice", 1123d, startDate, endDate, user);
+                Invoice invoice = new Invoice(123l, "testInvoice", 1123d, startDate, endDate, user);
                 Payment payment = new Payment(1111,234d)
 
 ;
@@ -89,7 +89,7 @@ public class userIT {
    /*         assertNotNull("ID should not be null", emuser.getUserId());
             assertNotNull("ID should not be null", payment.getPaymentId());
             assertNotNull("ID should not be null", invoice.getInvoiceId());*/
-            Invoice testInvoice =em.find(Invoice.class,123);
+            Invoice testInvoice =em.find(Invoice.class,123l);
             assertNotNull(testInvoice.getInvoiceAmount());
             assertNotNull(testInvoice.getUser().getUserEmail());
 
