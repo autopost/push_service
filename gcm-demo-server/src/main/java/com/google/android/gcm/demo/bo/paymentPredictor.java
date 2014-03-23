@@ -103,7 +103,9 @@ public class paymentPredictor {
         Root<User> userRoot = criteria.from(User.class );
         criteria.select(userRoot);
         criteria.where(queryBuilder.equal(userRoot.get(User_.userId),9999l));
-        List<User> people = em.createQuery( criteria ).getResultList();
+        User userQueried = em.createQuery(criteria).getSingleResult();
+
+
 
         return 1000.0d;
     }

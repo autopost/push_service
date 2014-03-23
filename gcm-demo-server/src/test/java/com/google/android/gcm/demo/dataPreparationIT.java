@@ -3,6 +3,7 @@ package com.google.android.gcm.demo;
 import com.google.android.gcm.demo.entity.Invoice;
 import com.google.android.gcm.demo.entity.Payment;
 import com.google.android.gcm.demo.entity.User;
+import com.google.android.gcm.demo.entity.User_;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +12,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -83,5 +87,15 @@ public class dataPreparationIT {
 
         //Retrieve payments from the databaseç
         assertNotNull(em.find(User.class,9999l).getPaymentList().size());
+
+
+        CriteriaBuilder queryBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<User> criteria = queryBuilder.createQuery(User.class);
+        Root<User> userRoot = criteria.from(User.class );
+        criteria.select(userRoot);
+        criteria.where(queryBuilder.equal(userRoot.get(User_.userId),9999l));
+        List<User> userQueried = em.createQuery(criteria).getResultList();
+        assertEquals(em.find(User.class,9999l).getUserEmail(), userQueried.get(0).getUserEmail());
+
     }
 }
