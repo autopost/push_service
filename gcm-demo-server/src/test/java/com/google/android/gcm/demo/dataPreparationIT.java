@@ -1,6 +1,5 @@
 package com.google.android.gcm.demo;
 
-import com.google.android.gcm.demo.entity.Invoice;
 import com.google.android.gcm.demo.entity.Payment;
 import com.google.android.gcm.demo.entity.User;
 import com.google.android.gcm.demo.entity.User_;
@@ -69,7 +68,7 @@ public class dataPreparationIT {
         List<Payment> paymentsList = new ArrayList<>();
 
 
-        for (int i =0 ; i < 40; i++){
+        for (int i =0 ; i < 10; i++){
             paymentsList.add(new Payment(1111l+(long)i,(Double)(Math.random() * 50 + 1),
                     new RandomDateOfTransaction().prepareDate(2012,2013),
                     new RandomDateOfTransaction().prepareDate(2012,2013)));
