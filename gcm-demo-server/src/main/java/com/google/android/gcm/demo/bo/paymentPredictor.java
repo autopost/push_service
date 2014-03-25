@@ -73,7 +73,7 @@ public class PaymentPredictor {
 
     }
 
-    public Double computeMaxPaymentAmount(List<Payment> paymentList){
+    private Double computeMaxPaymentAmount(List<Payment> paymentList){
         Double max = 0d;
         for (Payment pmnt:paymentList){
             if (pmnt.getAmount()>= max){
@@ -83,7 +83,7 @@ public class PaymentPredictor {
         return max;
     }
 
-    public Double computeMinPaymentAmount(Date startDate, Date endDate){
+    private Double computeMinPaymentAmount(Date startDate, Date endDate){
         return 1.0d;
     }
 

@@ -33,7 +33,7 @@ public class PaymentPredictorTest {
     }
 
     @Test
-    public void testTestRun(){
+    public void Run(){
         CriteriaBuilder queryBuilder = em.getCriteriaBuilder();
         CriteriaQuery<User> criteria = queryBuilder.createQuery(User.class);
         Root<User> userRoot = criteria.from(User.class );
