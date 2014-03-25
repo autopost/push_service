@@ -36,26 +36,28 @@ public class InvoicePredictor {
 //        We have carried out a simplification, have simply divided on 10000.
         // double daxmax = 10000.0D;
 
-        Integer maxAmount = computeMaxClearedDay(invoiceList);
-        List<Integer> datesClearedList = datesClearedList(invoiceList);
+        Double maxAmount = computeMaxClearedDay(invoiceList);
+        List<Double> datesClearedList = datesClearedList(invoiceList);
 
-        for(int i=0; i<datesClearedList.size()-5; i++){
+        for(int i=0; i<datesClearedList.size(); i=i+5) {
             trainingSet.addElement(new SupervisedTrainingElement(new double[]{
                     datesClearedList.get(i) / maxAmount,
                     datesClearedList.get(i+1) / maxAmount,
                     datesClearedList.get(i+2) / maxAmount,
-                    datesClearedList.get(i+3)/ maxAmount},
-                    new double[]{datesClearedList.get(i+4) / maxAmount}));
+                    datesClearedList.get(i+3) / maxAmount},
+                    new double[]{datesClearedList.get(i+4) / maxAmount}
+            ));
         }
+
 
         neuralNet.learnInSameThread(trainingSet);
         System.out.println("Time stamp N2:" + new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss:MM").format(new Date()));
 
         TrainingSet testSet = new TrainingSet();
-        testSet.addElement(new TrainingElement(new double[]{datesClearedList.get(datesClearedList.size()-4)/ maxAmount,
-                datesClearedList.get(datesClearedList.size()-3)/ maxAmount,
-                datesClearedList.get(datesClearedList.size()-2)/ maxAmount,
-                datesClearedList.get(datesClearedList.size()-1)/ maxAmount}));
+        testSet.addElement(new TrainingElement(new double[]{datesClearedList.get(5)/ maxAmount,
+                datesClearedList.get(6)/ maxAmount,
+                datesClearedList.get(7)/ maxAmount,
+                datesClearedList.get(8)/ maxAmount}));
 
         for (TrainingElement testElement : testSet.trainingElements()) {
             neuralNet.setInput(testElement.getInput());
@@ -67,26 +69,26 @@ public class InvoicePredictor {
         System.out.println("Time stamp N3:" + new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss:MM").format(new Date()));
     }
 
-    private Integer computeMaxClearedDay(List<Invoice> invoiceList){
-        int max = 0;
+    private Double computeMaxClearedDay(List<Invoice> invoiceList){
+        double max = 0;
         for (Invoice invoice:invoiceList){
             Calendar cal = Calendar.getInstance();
             cal.setTime(invoice.getInvoiceCompletedTS());
             int day = cal.get(Calendar.DAY_OF_MONTH);
             if (day >= max){
-                max = day;
+                max = (double)day;
             }
         }
         return max;
     }
 
-    private List<Integer> datesClearedList(List<Invoice> invoiceList){
-        List<Integer> dateList = new ArrayList<>();
+    private List<Double> datesClearedList(List<Invoice> invoiceList){
+        List<Double> dateList = new ArrayList<>();
         Calendar cal = Calendar.getInstance();
         for (Invoice invoice:invoiceList){
             cal.setTime(invoice.getInvoiceCompletedTS());
             int day = cal.get(Calendar.DAY_OF_MONTH);
-            dateList.add(cal.get(Calendar.DAY_OF_MONTH));
+            dateList.add((double)cal.get(Calendar.DAY_OF_MONTH));
         }
         return dateList;
     }

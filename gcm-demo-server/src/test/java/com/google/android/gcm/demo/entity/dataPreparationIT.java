@@ -11,10 +11,7 @@ import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -100,12 +97,9 @@ public class dataPreparationIT {
         class SequentialRandomDayPopulation {
 
             public Date prepareDate(int month) {
-
-                GregorianCalendar gc = new GregorianCalendar();
-                gc.set(gc.DAY_OF_MONTH, (int)Math.round(Math.random() * 31));
-                gc.set(gc.MONTH, month);
-                gc.set(gc.YEAR,2013);
-                return gc.getTime();
+                Calendar cal = new GregorianCalendar(2013, month, 1);
+                cal.set(GregorianCalendar.DAY_OF_MONTH,(int)Math.round(Math.random() * 31));
+                return cal.getTime();
             }
         }
 
@@ -114,25 +108,27 @@ public class dataPreparationIT {
         List<Invoice> invoices = new ArrayList<>();
         User user = new User(1000l, "inoviceUser@test.com", "pass", "1234");
         for (int i =0; i < 10; i++){
-            invoices.add(new Invoice((long)i,"testInvoice",1d, new SequentialRandomDayPopulation().prepareDate(i),new SequentialRandomDayPopulation().prepareDate(i),user));
+            invoices.add(new Invoice((long)(i+1),"testInvoice",1d, new SequentialRandomDayPopulation().prepareDate(i),new SequentialRandomDayPopulation().prepareDate(i),user));
         }
 
         // Persists paymentsList to the database
 
         tx.begin();
-        for (Invoice invoice : invoices) {
+        em.persist(user);
+        invoices.forEach((Invoice value)->em.persist(value));
+/*        for (Invoice invoice : invoices) {
             em.persist(invoice);
-        }
+        }*/
         tx.commit();
-
-        //Retrieve payments from the databaseç
         CriteriaBuilder queryBuilder = em.getCriteriaBuilder();
         CriteriaQuery<Invoice> criteria = queryBuilder.createQuery(Invoice.class);
-        Root<Invoice> userRoot = criteria.from(Invoice.class );
-        criteria.select(userRoot);
-        criteria.where(queryBuilder.equal(userRoot.get(Invoice_.invoiceId),1l));
+        Root<Invoice> invoiceRoot = criteria.from(Invoice.class );
+        criteria.select(invoiceRoot);
+        //criteria.where(queryBuilder.equal(invoiceRoot.get(Invoice_.invoiceId),1l));
         List<Invoice> invoiceQueried = em.createQuery(criteria).getResultList();
-        assertEquals(em.find(Invoice.class,1l).getInvoiceCompletedTS(), invoiceQueried.get(0).getInvoiceCompletedTS());
+
+        assertEquals(em.find(Invoice.class, 1l).getInvoiceCompletedTS(), invoiceQueried.get(0).getInvoiceCompletedTS());
+
 
     }
 
