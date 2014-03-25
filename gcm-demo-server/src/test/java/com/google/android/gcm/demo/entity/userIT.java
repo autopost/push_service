@@ -1,9 +1,5 @@
-package com.google.android.gcm.demo;
+package com.google.android.gcm.demo.entity;
 
-import com.google.android.gcm.demo.entity.Invoice;
-import com.google.android.gcm.demo.entity.Payment;
-import com.google.android.gcm.demo.entity.User;
-import com.google.android.gcm.demo.entity.User_;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -13,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

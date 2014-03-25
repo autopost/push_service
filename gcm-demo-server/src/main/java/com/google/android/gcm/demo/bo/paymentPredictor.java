@@ -67,10 +67,7 @@ public class PaymentPredictor {
             System.out.print("Input: " + testElement.getInput());
             System.out.println(" Output: " + networkOutput);
         }
-
         System.out.println("Time stamp N3:" + new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss:MM").format(new Date()));
-        System.exit(0);
-
     }
 
     private Double computeMaxPaymentAmount(List<Payment> paymentList){

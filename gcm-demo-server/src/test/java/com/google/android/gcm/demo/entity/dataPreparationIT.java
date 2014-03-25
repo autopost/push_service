@@ -1,8 +1,5 @@
-package com.google.android.gcm.demo;
+package com.google.android.gcm.demo.entity;
 
-import com.google.android.gcm.demo.entity.Payment;
-import com.google.android.gcm.demo.entity.User;
-import com.google.android.gcm.demo.entity.User_;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -97,4 +94,46 @@ public class dataPreparationIT {
         assertEquals(em.find(User.class,9999l).getUserEmail(), userQueried.get(0).getUserEmail());
 
     }
+    @Test
+    public void populateBasicInvoices()
+    {
+        class SequentialRandomDayPopulation {
+
+            public Date prepareDate(int month) {
+
+                GregorianCalendar gc = new GregorianCalendar();
+                gc.set(gc.DAY_OF_MONTH, (int)Math.round(Math.random() * 31));
+                gc.set(gc.MONTH, month);
+                gc.set(gc.YEAR,2013);
+                return gc.getTime();
+            }
+        }
+
+        // create list of basic invoices
+
+        List<Invoice> invoices = new ArrayList<>();
+        User user = new User(1000l, "inoviceUser@test.com", "pass", "1234");
+        for (int i =0; i < 10; i++){
+            invoices.add(new Invoice((long)i,"testInvoice",1d, new SequentialRandomDayPopulation().prepareDate(i),new SequentialRandomDayPopulation().prepareDate(i),user));
+        }
+
+        // Persists paymentsList to the database
+
+        tx.begin();
+        for (Invoice invoice : invoices) {
+            em.persist(invoice);
+        }
+        tx.commit();
+
+        //Retrieve payments from the databaseç
+        CriteriaBuilder queryBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<Invoice> criteria = queryBuilder.createQuery(Invoice.class);
+        Root<Invoice> userRoot = criteria.from(Invoice.class );
+        criteria.select(userRoot);
+        criteria.where(queryBuilder.equal(userRoot.get(Invoice_.invoiceId),1l));
+        List<Invoice> invoiceQueried = em.createQuery(criteria).getResultList();
+        assertEquals(em.find(Invoice.class,1l).getInvoiceCompletedTS(), invoiceQueried.get(0).getInvoiceCompletedTS());
+
+    }
+
 }

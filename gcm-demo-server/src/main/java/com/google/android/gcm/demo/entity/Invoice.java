@@ -35,7 +35,7 @@ public class Invoice {
     private Date invoiceCompletedTS;
     @ManyToOne
     @JoinField(name="userId")
-    private  User user;
+    private User user;
     @OneToMany
     @JoinField(name = "paymentId")
     private List<Payment> paymentList;
@@ -54,7 +54,10 @@ public class Invoice {
 		this.setUser(user);
 	}
 
-	public long getInvoiceId() {
+
+
+
+    public long getInvoiceId() {
 		return invoiceId;
 	}
 
