@@ -39,7 +39,7 @@ public class InvoicePredictor {
         Double maxAmount = computeMaxClearedDay(invoiceList);
         List<Double> datesClearedList = datesClearedList(invoiceList);
 
-        for(int i=0; i<datesClearedList.size(); i=i+5) {
+        for(int i=0; i<datesClearedList.size(); i=i-4) {
             trainingSet.addElement(new SupervisedTrainingElement(new double[]{
                     datesClearedList.get(i) / maxAmount,
                     datesClearedList.get(i+1) / maxAmount,
@@ -54,9 +54,9 @@ public class InvoicePredictor {
         System.out.println("Time stamp N2:" + new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss:MM").format(new Date()));
 
         TrainingSet testSet = new TrainingSet();
-        testSet.addElement(new TrainingElement(new double[]{datesClearedList.get(5)/ maxAmount,
-                datesClearedList.get(6)/ maxAmount,
-                datesClearedList.get(7)/ maxAmount,
+        testSet.addElement(new TrainingElement(new double[]{(datesClearedList.size()-3)/ maxAmount,
+                datesClearedList.get(datesClearedList.size()-2)/ maxAmount,
+                datesClearedList.get(7)-1/ maxAmount,
                 datesClearedList.get(8)/ maxAmount}));
 
         for (TrainingElement testElement : testSet.trainingElements()) {
