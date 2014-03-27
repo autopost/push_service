@@ -17,7 +17,7 @@ import java.util.*;
  * Created by VladyslavPrytula on 3/23/14.
  */
 @Loggable
-public class PaymentPredictor {
+public class paymentPredictor {
     private int maxIterations;
 
     public PaymentPredictor() {
