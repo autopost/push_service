@@ -21,7 +21,7 @@ import static org.junit.Assert.assertNotNull;
  * Created by VladyslavPrytula on 3/20/14.
  * Integration test for persistence units
  */
-public class userIT {
+public class UserTest {
 
     private static EntityManagerFactory emf =  Persistence.createEntityManagerFactory("mongoDBUnit1");
 
