@@ -14,6 +14,7 @@ import java.util.*;
 /**
  * Created by VladyslavPrytula on 3/25/14.
  */
+//@Service
 public class InvoicePredictor {
     private int maxDate=31;
     private int maxIterations = 10000;

@@ -7,6 +7,7 @@
 
 
     <persistence-unit name="mongoDBUnit1" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
        <!-- <exclude-unlisted-classes>false</exclude-unlisted-classes>-->
         <class>com.google.android.gcm.demo.entity.Invoice</class>
         <class>com.google.android.gcm.demo.entity.User</class>
@@ -27,6 +28,7 @@
     </persistence-unit>
 
      <persistence-unit name="mongoDBUnit2" transaction-type="JTA">
+        <provider>  org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <class>com.google.android.gcm.demo.entity.Invoice</class>
         <class>com.google.android.gcm.demo.entity.User</class>
         <class>com.google.android.gcm.demo.entity.Payment</class>

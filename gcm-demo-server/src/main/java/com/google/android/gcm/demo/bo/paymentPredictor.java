@@ -11,12 +11,15 @@ import org.neuroph.nnet.MultiLayerPerceptron;
 import org.neuroph.nnet.learning.LMS;
 
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Vector;
 
 /**
  * Created by VladyslavPrytula on 3/23/14.
  */
 @Loggable
+//@Service
 public class PaymentPredictor {
     private int maxIterations;
 
