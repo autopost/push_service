@@ -81,14 +81,14 @@ public class dataPreparationIT {
         //Retrieve payments from the databaseç
         assertNotNull(em.find(User.class,9999l).getPaymentList().size());
 
-/*
+
         CriteriaBuilder queryBuilder = em.getCriteriaBuilder();
         CriteriaQuery<User> criteria = queryBuilder.createQuery(User.class);
         Root<User> userRoot = criteria.from(User.class );
         criteria.select(userRoot);
         criteria.where(queryBuilder.equal(userRoot.get(User_.userId),9999l));
         List<User> userQueried = em.createQuery(criteria).getResultList();
-        assertEquals(em.find(User.class,9999l).getUserEmail(), userQueried.get(0).getUserEmail());*/
+        assertEquals(em.find(User.class,9999l).getUserEmail(), userQueried.get(0).getUserEmail());
 
     }
     @Test

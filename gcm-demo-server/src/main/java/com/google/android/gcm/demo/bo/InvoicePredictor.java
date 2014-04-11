@@ -1,5 +1,6 @@
 package com.google.android.gcm.demo.bo;
 
+import com.google.android.gcm.demo.custqualifiers.Loggable;
 import com.google.android.gcm.demo.entity.Invoice;
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.core.learning.SupervisedTrainingElement;
@@ -7,6 +8,7 @@ import org.neuroph.core.learning.TrainingElement;
 import org.neuroph.core.learning.TrainingSet;
 import org.neuroph.nnet.MultiLayerPerceptron;
 import org.neuroph.nnet.learning.LMS;
+import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -14,8 +16,9 @@ import java.util.*;
 /**
  * Created by VladyslavPrytula on 3/25/14.
  */
-//@Service
-public class InvoicePredictor {
+@Loggable
+@Service
+public class InvoicePredictor implements Predictor<Invoice> {
     private int maxDate=31;
     private int maxIterations = 10000;
 
@@ -92,5 +95,10 @@ public class InvoicePredictor {
             dateList.add((double)cal.get(Calendar.DAY_OF_MONTH));
         }
         return dateList;
+    }
+
+    @Override
+    public void predict(Invoice invoice) {
+
     }
 }

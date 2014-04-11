@@ -9,6 +9,7 @@ import org.neuroph.core.learning.TrainingElement;
 import org.neuroph.core.learning.TrainingSet;
 import org.neuroph.nnet.MultiLayerPerceptron;
 import org.neuroph.nnet.learning.LMS;
+import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,14 +20,14 @@ import java.util.Vector;
  * Created by VladyslavPrytula on 3/23/14.
  */
 @Loggable
-//@Service
-public class PaymentPredictor {
+@Service
+public class PaymentPredictor implements Predictor<User>{
     private int maxIterations;
 
     public PaymentPredictor() {
         maxIterations = 10000;
     }
-
+    @Override
     public void predict(User user) {
 
          NeuralNetwork neuralNet = new MultiLayerPerceptron(4, 9, 1);
@@ -43,6 +44,7 @@ public class PaymentPredictor {
        // double daxmax = 10000.0D;
 
         List<Payment> paymentList = user.getPaymentList();
+        //TODO:throws null pointer, since paymentList can be zero
         Double maxAmount = computeMaxPaymentAmount(paymentList);
 
         for(int i=0; i<paymentList.size()-5; i++){
