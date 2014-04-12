@@ -29,6 +29,7 @@ public class AppConfig extends WebMvcConfigurerAdapter{
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
+
     // Add bean for InternalResourceViewResolver
     @Bean
     public InternalResourceViewResolver getInternalResourceViewResolver() {

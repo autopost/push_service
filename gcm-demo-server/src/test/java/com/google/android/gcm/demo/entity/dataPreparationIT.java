@@ -124,7 +124,7 @@ public class dataPreparationIT {
         CriteriaQuery<Invoice> criteria = queryBuilder.createQuery(Invoice.class);
         Root<Invoice> invoiceRoot = criteria.from(Invoice.class );
         criteria.select(invoiceRoot);
-        //criteria.where(queryBuilder.equal(invoiceRoot.get(Invoice_.invoiceId),1l));
+        criteria.where(queryBuilder.equal(invoiceRoot.get(Invoice_.invoiceId),1l));
         List<Invoice> invoiceQueried = em.createQuery(criteria).getResultList();
 
         assertEquals(em.find(Invoice.class, 1l).getInvoiceCompletedTS(), invoiceQueried.get(0).getInvoiceCompletedTS());

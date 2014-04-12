@@ -1,10 +1,14 @@
 package com.google.android.gcm.demo.controller;
 
 
+import com.google.android.gcm.demo.bo.PaymentPredictor;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -28,19 +32,19 @@ public class HelloControllerTest {
     @Autowired
     protected WebApplicationContext wac;
 
-  //  @Mock
-  //  PaymentPredictor paymentPredictor;
+    @Mock
+    PaymentPredictor paymentPredictor;
 
-  //  @InjectMocks
-  //  HelloController helloController;
+    @InjectMocks
+    HelloController helloController;
 
     private MockMvc mockMvc;
 
     @Before
     public void setUp() throws Exception {
-    //    MockitoAnnotations.initMocks(this);
-    //    mockMvc = MockMvcBuilders.standaloneSetup(helloController).build();
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        MockitoAnnotations.initMocks(this);
+        mockMvc = MockMvcBuilders.standaloneSetup(helloController).build();
+      //  this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
     }
 
     @After
