@@ -1,5 +1,6 @@
 package com.google.android.gcm.demo.controller;
 
+import com.google.android.gcm.demo.bo.PaymentPredictor;
 import com.google.android.gcm.demo.bo.Predictor;
 import com.google.android.gcm.demo.entity.User;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,7 @@ import java.text.ParseException;
 public class HelloController {
 
     @Inject
-    Predictor<User> paymentPredictor;
+    PaymentPredictor paymentPredictor;
 
 
 	@RequestMapping(value = "/hello",method = RequestMethod.GET)

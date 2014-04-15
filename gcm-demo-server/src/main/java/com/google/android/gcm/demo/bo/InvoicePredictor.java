@@ -1,6 +1,6 @@
 package com.google.android.gcm.demo.bo;
 
-import com.google.android.gcm.demo.custqualifiers.Loggable;
+
 import com.google.android.gcm.demo.entity.Invoice;
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.core.learning.SupervisedTrainingElement;
@@ -16,9 +16,9 @@ import java.util.*;
 /**
  * Created by VladyslavPrytula on 3/25/14.
  */
-@Loggable
+
 @Service
-public class InvoicePredictor implements Predictor<Invoice> {
+public class InvoicePredictor {
     private int maxDate=31;
     private int maxIterations = 10000;
 
@@ -97,8 +97,4 @@ public class InvoicePredictor implements Predictor<Invoice> {
         return dateList;
     }
 
-    @Override
-    public void predict(Invoice invoice) {
-
-    }
 }
