@@ -3,7 +3,9 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <div class="header">
     <c:url value="/index.htm" var="homeUrl"/>
-    <div class="logo"><a href="${homeUrl}"><img src="<c:url value="/resources/images/logo.gif"/>" alt="" title="" border="0" /></a></div>            
+    <div class="logo"><a href="${homeUrl}">
+        <img src="<c:url value="/resources/images/logo.gif"/>" alt="" title="" border="0" /></a>
+    </div>
     <div class="nav">
         <ul style="float: left;">                                                                       
             <li class="selected"><a href="${homeUrl}"><spring:message code="nav.home"/></a></li>

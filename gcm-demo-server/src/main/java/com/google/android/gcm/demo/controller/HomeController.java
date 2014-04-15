@@ -13,13 +13,13 @@ import java.text.ParseException;
  */
 @Controller
 public class HomeController {
-    @RequestMapping(value = "/home",method = RequestMethod.GET)
+    @RequestMapping(value = "/",method = RequestMethod.GET)
     public String printWelcome(ModelMap model) throws ParseException {
         User user = new User(11223344l, "Controller@test.com", "pass", "21111111");
         //   if (user.getPaymentList().size()>0) {
         //       paymentPredictor.predict(user);
         //   }
         model.addAttribute("message",user.getUserEmail());
-        return "home";
+        return "home_test";
     }
 }

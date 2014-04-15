@@ -2,6 +2,7 @@ package com.google.android.gcm.demo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 
 /**
@@ -10,13 +11,23 @@ import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 @Configuration
 public class ViewConfig {
 
-    @Bean
-    public TilesConfigurer tilesConfigurer() {
+ /*    @Bean
+   public TilesConfigurer tilesConfigurer() {
         TilesConfigurer configurer = new TilesConfigurer();
         configurer.setDefinitions(new String[]
                 { "/WEB-INF/layouts/tiles.xml",
-                        "/WEB-INF/views/**/tiles.xml" });
+                        "/WEB-INF/views*//**//*tiles.xml" });
         configurer.setCheckRefresh(true);
         return configurer;
+    }
+*/
+
+    // Add bean for InternalResourceViewResolver
+    @Bean
+    public InternalResourceViewResolver getInternalResourceViewResolver() {
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setPrefix("/WEB-INF/pages/");
+        resolver.setSuffix(".jsp");
+        return resolver;
     }
 }

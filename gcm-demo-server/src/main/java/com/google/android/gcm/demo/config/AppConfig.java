@@ -34,13 +34,5 @@ public class AppConfig extends WebMvcConfigurerAdapter{
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
 
-/*    // Add bean for InternalResourceViewResolver
-    @Bean
-    public InternalResourceViewResolver getInternalResourceViewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/pages/");
-        resolver.setSuffix(".jsp");
-        return resolver;
-    }*/
 
 }
