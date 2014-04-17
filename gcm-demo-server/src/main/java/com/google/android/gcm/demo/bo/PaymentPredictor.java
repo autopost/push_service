@@ -1,5 +1,6 @@
 package com.google.android.gcm.demo.bo;
 
+
 import com.google.android.gcm.demo.entity.Payment;
 import com.google.android.gcm.demo.entity.User;
 import org.neuroph.core.NeuralNetwork;
@@ -18,14 +19,15 @@ import java.util.Vector;
 /**
  * Created by VladyslavPrytula on 3/23/14.
  */
+
 @Service
-public class PaymentPredictor implements Predictor<User>{
+public class PaymentPredictor {
     private int maxIterations;
 
     public PaymentPredictor() {
         maxIterations = 10000;
     }
-    @Override
+
     public void predict(User user) {
 
          NeuralNetwork neuralNet = new MultiLayerPerceptron(4, 9, 1);
