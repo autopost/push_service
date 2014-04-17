@@ -55,7 +55,7 @@ public class HelloControllerTest {
 
     @Test
     public void testPrintWelcome() throws Exception {
-     //   Mockito.when(paymentPredictor.predict(user)).thenReturn("test");
+     //   Mockito.when(PaymentPredictor.predict(user)).thenReturn("test");
         mockMvc.perform(get("/hello"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("hello_test"));

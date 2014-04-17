@@ -115,10 +115,10 @@ public class dataPreparationIT {
 
         tx.begin();
         em.persist(user);
-        invoices.forEach((Invoice value)->em.persist(value));
-/*        for (Invoice invoice : invoices) {
+        //invoices.forEach((Invoice value)->em.persist(value));
+        for (Invoice invoice : invoices) {
             em.persist(invoice);
-        }*/
+        }
         tx.commit();
         CriteriaBuilder queryBuilder = em.getCriteriaBuilder();
         CriteriaQuery<Invoice> criteria = queryBuilder.createQuery(Invoice.class);

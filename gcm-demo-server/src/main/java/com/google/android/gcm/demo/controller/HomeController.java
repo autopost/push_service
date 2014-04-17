@@ -17,7 +17,7 @@ public class HomeController {
     public String printWelcome(ModelMap model) throws ParseException {
         User user = new User(11223344l, "Controller@test.com", "pass", "21111111");
         //   if (user.getPaymentList().size()>0) {
-        //       paymentPredictor.predict(user);
+        //       PaymentPredictor.predict(user);
         //   }
         model.addAttribute("message",user.getUserEmail());
         return "home_test";
