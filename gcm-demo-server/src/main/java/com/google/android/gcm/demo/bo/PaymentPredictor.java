@@ -1,6 +1,5 @@
 package com.google.android.gcm.demo.bo;
 
-import com.google.android.gcm.demo.custqualifiers.Loggable;
 import com.google.android.gcm.demo.entity.Payment;
 import com.google.android.gcm.demo.entity.User;
 import org.neuroph.core.NeuralNetwork;
@@ -19,7 +18,6 @@ import java.util.Vector;
 /**
  * Created by VladyslavPrytula on 3/23/14.
  */
-@Loggable
 @Service
 public class PaymentPredictor implements Predictor<User>{
     private int maxIterations;
