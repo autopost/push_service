@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="neuroph">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/gcm-demo-server/src/main/resources/neuroph.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
