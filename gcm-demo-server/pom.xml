@@ -299,7 +299,7 @@
             </plugin>-->
             <!-- autodeploy for glassfish server -->
 
-<!--            <plugin>
+  <!--          <plugin>
                 <groupId>org.glassfish.maven.plugin</groupId>
                 <artifactId>maven-glassfish-plugin</artifactId>
                 <version>2.1</version>
@@ -307,7 +307,6 @@
                     <glassfishDirectory>${glassfish.glassfishDirectory}</glassfishDirectory>
                     <user>admin</user>
                     <adminPassword>admin</adminPassword>
-                    &lt;!&ndash;                    <passwordFile>${glassfish.directory}/domains/domain1/config/domain-passwords</passwordFile>&ndash;&gt;
                     <domain>
                         <name>domain1</name>
                         <httpPort>8080</httpPort>
