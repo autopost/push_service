@@ -17,8 +17,8 @@
 
     <ol class="payment-list">
         <c:forEach var="user" items="${users}">
-            <c:forEach var="payment" items="${user.paymentList}">
-            <s:url value="/payments/{user}"
+
+            <s:url value="/payments/{userId}"
                    var="payement_url" >
                 <s:param name="userId"
                          value="${user.userId}" />
@@ -29,7 +29,7 @@
                         <c:out value="${payment.amount}" />
                   </span>
             </li>
-            </c:forEach>
+
         </c:forEach>
     </ol>
 </div>

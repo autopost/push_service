@@ -7,7 +7,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.inject.Inject;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -19,6 +20,7 @@ import java.util.List;
 /**
  * Created by VladyslavPrytula on 4/14/14.
  */
+@TransactionManagement(TransactionManagementType.CONTAINER)
 @Controller
 public class HomeController {
     @PersistenceContext(unitName = "mongoDBUnit2")
@@ -35,6 +37,9 @@ public class HomeController {
         criteria.select(userRoot);
         //criteria.where(queryBuilder.equal(userRoot.get(User_.userId),9999l));
         criteria.where(queryBuilder.equal(userRoot.get(User_.userId),9999l));
+       //
+       // criteria.where(userRoot.get(User_.paymentList).isNotNull());
+
         List<User> userQueried = em.createQuery(criteria).getResultList();
 
         //   if (user.getPaymentList().size()>0) {

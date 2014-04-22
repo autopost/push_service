@@ -16,5 +16,8 @@
                        value="/WEB-INF/views/home.jsp" />
     </definition>
 
-
+    <definition name="sent" extends="template">
+        <put-attribute name="content"
+                       value="/WEB-INF/views/sent.jsp" />
+    </definition>
 </tiles-definitions>

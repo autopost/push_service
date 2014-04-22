@@ -40,16 +40,16 @@ public class InvoicePredictor {
 //        We have carried out a simplification, have simply divided on 10000.
         // double daxmax = 10000.0D;
 
-        Double maxAmount = computeMaxClearedDay(invoiceList);
+        Double maxDate = computeMaxClearedDay(invoiceList);
         List<Double> datesClearedList = datesClearedList(invoiceList);
 
         for(int i=0; i<datesClearedList.size(); i=i-4) {
             trainingSet.addElement(new SupervisedTrainingElement(new double[]{
-                    datesClearedList.get(i) / maxAmount,
-                    datesClearedList.get(i+1) / maxAmount,
-                    datesClearedList.get(i+2) / maxAmount,
-                    datesClearedList.get(i+3) / maxAmount},
-                    new double[]{datesClearedList.get(i+4) / maxAmount}
+                    datesClearedList.get(i) / maxDate,
+                    datesClearedList.get(i+1) / maxDate,
+                    datesClearedList.get(i+2) / maxDate,
+                    datesClearedList.get(i+3) / maxDate},
+                    new double[]{datesClearedList.get(i+4) / maxDate}
             ));
         }
 
@@ -58,10 +58,10 @@ public class InvoicePredictor {
         System.out.println("Time stamp N2:" + new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss:MM").format(new Date()));
 
         TrainingSet testSet = new TrainingSet();
-        testSet.addElement(new TrainingElement(new double[]{(datesClearedList.size()-3)/ maxAmount,
-                datesClearedList.get(datesClearedList.size()-2)/ maxAmount,
-                datesClearedList.get(7)-1/ maxAmount,
-                datesClearedList.get(8)/ maxAmount}));
+        testSet.addElement(new TrainingElement(new double[]{(datesClearedList.size()-3)/ maxDate,
+                datesClearedList.get(datesClearedList.size()-2)/ maxDate,
+                datesClearedList.get(7)-1/ maxDate,
+                datesClearedList.get(8)/ maxDate}));
 
         for (TrainingElement testElement : testSet.trainingElements()) {
             neuralNet.setInput(testElement.getInput());

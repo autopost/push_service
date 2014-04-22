@@ -28,7 +28,7 @@ public class PaymentPredictor {
         maxIterations = 10000;
     }
 
-    public void predict(User user) {
+    public Double predict(User user) {
 
          NeuralNetwork neuralNet = new MultiLayerPerceptron(4, 9, 1);
         ((LMS) neuralNet.getLearningRule()).setMaxError(0.001);//0-1
@@ -73,6 +73,8 @@ public class PaymentPredictor {
             System.out.println(" Output: " + networkOutput);
         }
         System.out.println("Time stamp N3:" + new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss:MM").format(new Date()));
+
+        return neuralNet.getOutput().get(0)*maxAmount;
     }
 
     private Double computeMaxPaymentAmount(List<Payment> paymentList){

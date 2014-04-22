@@ -7,9 +7,12 @@ package com.google.android.gcm.demo.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +21,7 @@ import java.util.Map;
 public class DataBaseConfig {
 
     @Bean(name = "entitymanager1")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean1() {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
 
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
       /*  entityManagerFactoryBean.setPackagesToScan(new String[]{this.environment
@@ -37,6 +40,16 @@ public class DataBaseConfig {
         return entityManagerFactoryBean;
     }
 
+
+
+
+/*
+    @Bean
+    public JpaTransactionManager transactionManager() {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(entityManagerFactoryBean().getObject());
+        return transactionManager;
+    }*/
 
 
 }
