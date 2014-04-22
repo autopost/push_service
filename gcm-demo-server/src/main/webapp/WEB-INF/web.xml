@@ -6,14 +6,14 @@
     <!--
       <listener>
         <listener-class>
-          com.google.android.gcm.demo.server.ApiKeyInitializer
+          ApiKeyInitializer
         </listener-class>
       </listener>
 
       <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>
-          com.google.android.gcm.demo.server.RegisterServlet
+          RegisterServlet
         </servlet-class>
         <load-on-startup>1</load-on-startup>
       </servlet>
@@ -27,7 +27,7 @@
       <servlet>
         <servlet-name>SendServlet</servlet-name>
         <servlet-class>
-          com.google.android.gcm.demo.server.SendServlet
+          SendServlet
         </servlet-class>
         <load-on-startup>1</load-on-startup>
       </servlet>
@@ -40,7 +40,7 @@
       <servlet>
         <servlet-name>UnregisterServlet</servlet-name>
         <servlet-class>
-          com.google.android.gcm.demo.server.UnregisterServlet
+          UnregisterServlet
         </servlet-class>
         <load-on-startup>1</load-on-startup>
       </servlet>
@@ -53,7 +53,7 @@
       <servlet>
         <servlet-name>SendAllMessagesServlet</servlet-name>
         <servlet-class>
-          com.google.android.gcm.demo.server.SendAllMessagesServlet
+          SendAllMessagesServlet
         </servlet-class>
         <load-on-startup>1</load-on-startup>
       </servlet>
@@ -66,7 +66,7 @@
       <servlet>
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>
-          com.google.android.gcm.demo.server.HomeServlet
+          HomeServlet
         </servlet-class>
         <load-on-startup>1</load-on-startup>
       </servlet>
@@ -88,7 +88,7 @@
             <init-param>
                 <param-name>contextConfigLocation</param-name>
                 <param-value>
-                    com.google.android.gcm.demo.config.AppConfig
+                    AppConfig
                 </param-value>
             </init-param>
             <load-on-startup>1</load-on-startup>
