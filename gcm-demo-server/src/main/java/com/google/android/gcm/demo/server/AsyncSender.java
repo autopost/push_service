@@ -3,6 +3,7 @@ package com.google.android.gcm.demo.server;
 import com.google.android.gcm.demo.entity.User;
 import com.google.android.gcm.demo.sender.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,9 +28,8 @@ import java.util.logging.Logger;
  */
 //TODO: must be split in controller and service
 
-@Controller
-@RequestMapping("sendAllnew")
-public class SendAll {
+@Service
+public class AsyncSender {
 
     private static final int MULTICAST_SIZE = 1000;
 
@@ -52,8 +52,7 @@ public class SendAll {
     }
 
 
-    @RequestMapping(value ="/test", method = RequestMethod.GET)
-    public String sendAll(ModelMap model) throws ParseException, IOException {
+    public String sendAll() throws ParseException, IOException {
         List<String> devices = Datastore.getDevices();
         String status;
         if (devices.isEmpty()) {
@@ -88,8 +87,8 @@ public class SendAll {
                         total + " devices";
             }
         }
-        model.addAttribute("sentStatus",status.toString());
-        return "sent";
+
+        return status.toString();
     }
 
     private void asyncSend(List<String> partialDevices) {
