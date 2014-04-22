@@ -17,6 +17,7 @@ package com.google.android.gcm.demo.server;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,6 +30,7 @@ import java.util.logging.Logger;
  * {@value #PATH} file located in the classpath (typically under
  * {@code WEB-INF/classes}).
  */
+@WebListener
 public class ApiKeyInitializer implements ServletContextListener {
 
   static final String ATTRIBUTE_ACCESS_KEY = "apiKey";
