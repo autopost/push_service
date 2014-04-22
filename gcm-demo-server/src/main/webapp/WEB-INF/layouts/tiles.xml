@@ -6,7 +6,7 @@
 <tiles-definitions>
     <definition name="template" template="/WEB-INF/views/main_template.jsp">
         <put-attribute name="top"
-                       value="/WEB-INF/views/tiles/paymentForm.jsp"/>
+                       value="/WEB-INF/views/tiles/header.jsp"/>
         <put-attribute name="side"
                        value="/WEB-INF/views/tiles/login.jsp"/>
     </definition>
